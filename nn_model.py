@@ -2,14 +2,7 @@
 nn_model.py
 -----------
 Shared neural network architecture used by training, evaluation, and prediction.
-
-Architecture: a small fully-connected (MLP) network for tabular data.
-    input (12 features)
-      -> Linear(32) -> ReLU -> Dropout(0.2)
-      -> Linear(16) -> ReLU -> Dropout(0.2)
-      -> Linear(1)              [logit; apply sigmoid for probability]
-
-Why small?  We have ~6000 training games and only 12 features. Large networks
+We have ~6000 training games and only 12 features. Large networks
 would overfit immediately. The point of including a neural net is to show the
 classical-vs-deep comparison, not to oversell the model.
 """
