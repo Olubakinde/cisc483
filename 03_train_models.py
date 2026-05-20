@@ -5,14 +5,6 @@ Train TWO models on the feature table:
     1. Logistic Regression (baseline, interpretable)
     2. Neural Network       (PyTorch MLP, trained with epochs + early stopping)
 
-We hold out the most recent season as the test set (TEST_SEASON below).
-This is a TIME-BASED split, the only correct way to evaluate a forecasting
-model -- you should never train on future and test on past.
-
-The neural network also saves a training-curve plot to `training_curve.png`,
-which you can drop straight into the presentation.
-
-Run:   python 03_train_models.py
 Output:
     models/logistic_regression.joblib
     models/neural_net.pt
@@ -97,8 +89,6 @@ def train_neural_net(X_train_df, y_train_series) -> None:
     n_features = X_tr.shape[1]
     model = WinProbNet(n_features=n_features, h1=HIDDEN_1, h2=HIDDEN_2)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
-    # BCEWithLogitsLoss = numerically stable sigmoid + binary cross-entropy.
-    # Binary cross-entropy IS log loss -- the exact metric in our evaluation.
     criterion = nn.BCEWithLogitsLoss()
 
     train_losses, val_losses = [], []
