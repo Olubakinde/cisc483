@@ -4,18 +4,6 @@
 Score both trained models on the held-out test season and compare them
 to a naive baseline.
 
-Models:
-    * Naive               -- predicts the historical home win rate
-    * Logistic Regression
-    * Neural Network      (PyTorch MLP)
-
-Metrics (all from the project proposal):
-    * Log loss      -- primary metric for probabilistic forecasting
-    * Brier score   -- calibration quality
-    * AUC-ROC       -- ranking quality
-    * Accuracy      -- secondary, easy to interpret
-
-Run:  python 04_evaluate.py
 Output: prints results, writes results.csv
 """
 
@@ -59,8 +47,8 @@ def report(name: str, m: dict) -> None:
 def main() -> None:
     df = pd.read_csv("data/features.csv", parse_dates=["GAME_DATE"])
     test = df[df["SEASON"] == TEST_SEASON]
-    X_test_df = test[FEATURE_COLS]            # DataFrame, for sklearn/xgboost
-    X_test_np = X_test_df.values              # ndarray, for the NN
+    X_test_df = test[FEATURE_COLS]            
+    X_test_np = X_test_df.values             
     y_test = test[TARGET].values
     print(f"Evaluating on {len(test):,} games from {TEST_SEASON}")
 
