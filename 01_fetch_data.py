@@ -4,9 +4,6 @@
 Fetch NBA regular-season games from the free nba_api package and save
 them as a raw CSV.
 
-Run this ONCE (or whenever you want to refresh the data):
-    python 01_fetch_data.py
-
 Output: data/raw_games.csv
 """
 
@@ -15,7 +12,6 @@ import time
 import pandas as pd
 from nba_api.stats.endpoints import leaguegamefinder
 
-# Seasons to pull. Add or remove as you like.
 SEASONS = [
     "2019-20", "2020-21", "2021-22",
     "2022-23", "2023-24", "2024-25",
@@ -43,7 +39,6 @@ def main() -> None:
     for season in SEASONS:
         try:
             frames.append(fetch_season(season))
-            # nba.com rate limits aggressively; small sleep between calls
             time.sleep(1.0)
         except Exception as e:
             print(f"  !! failed for {season}: {e}")
